@@ -1,0 +1,16 @@
+{
+  "name": "concat.js",
+  "version": "0.0.1",
+  "description": "An API to concatenate javascript files on the fly",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "",
+  "author": "Massimiliano Marcon (@mmarcon)",
+  "license": "MIT",
+  "dependencies": {
+    "express": "3.0.3",
+    "request": "2.12"
+  }
+}
