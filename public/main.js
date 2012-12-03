@@ -12,11 +12,18 @@ var scripts = [
         description: 'jHERE Core.'
     },
     {
+        id: 'geocode',
+        name: 'geocode extension',
+        url: 'https://raw.github.com/mmarcon/jhere/master/dist/extensions/geocode.min.js',
+        description: 'Adds geocode and reverse geocode functionalities',
+        depends: ['jhere']
+    },
+    {
         id: 'autoinit',
         name: 'auto init extension',
         url: 'https://raw.github.com/mmarcon/jhere/master/dist/extensions/autoinit.min.js',
         description: 'Add maps to your pages without any JavaScript code.',
-        depends: ['jhere']
+        depends: ['jhere', 'geocode']
     },
     {
         id: 'route',
@@ -29,10 +36,19 @@ var scripts = [
 
 
 function checkDeps(){
-    var selected = byId[this.id];
-    $.each(selected.depends || [], function(i, id){
-        $('#' + id).prop('checked', true);
-    });
+    var $this = $(this), that = this;
+    if($this.prop('checked')) {
+        var selected = byId[that.id];
+        $.each(selected.depends || [], function(i, id){
+            $('#' + id).prop('checked', true);
+        });
+    } else {
+        $.each(scripts, function(i, s){
+            if(s.depends && ~$.inArray(that.id, s.depends)){
+                $('#' + s.id).prop('checked', false);
+            }
+        });
+    }
 }
 
 function download(e) {
